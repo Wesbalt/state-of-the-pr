@@ -1,4 +1,4 @@
-This document reports the largest pull request (PR) factors in the PR data set and explain their causes. Below is each factor with ten PRs that contain the largest values of said factor. The large values are motivated under each factor name. Build_Fail_Rate and Last_Build_Status are omitted because they have a well-defined range of [0,1]
+This document reports the largest pull request (PR) factors in the PR data and explains their causes. Below is each factor with ten PRs that contain the largest values of said factor. The large values are motivated under each factor name. Build_Fail_Rate and Last_Build_Status are omitted because they have a well-defined range of [0,1]
 
 Approvals - number of reviews in the approved state
 
