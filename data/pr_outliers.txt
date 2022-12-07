@@ -1,0 +1,755 @@
+This document reports the largest pull request (PR) factors in the PR data set and explain their causes. Below is each factor with ten PRs that contain the largest values of said factor. The large values are motivated under each factor name. Build_Fail_Rate and Last_Build_Status are omitted because they have a well-defined range of [0,1]
+
+Approvals - number of reviews in the approved state
+
+  Motivation: the large values happened due to bot activity and legitimately long PRs.
+
+  https://github.com/aws/aws-cdk/pull/20401
+    filename = aws_aws-cdk_20401.txt
+    value = 26 (closure state)
+
+  https://github.com/elastic/kibana/pull/134919
+    filename = elastic_kibana_134919.txt
+    value = 19 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/20663
+    filename = aws_aws-cdk_20663.txt
+    value = 16 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/19509
+    filename = aws_aws-cdk_19509.txt
+    value = 15 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/19904
+    filename = aws_aws-cdk_19904.txt
+    value = 15 (closure state)
+
+  https://github.com/elastic/kibana/pull/134600
+    filename = elastic_kibana_134600.txt
+    value = 14 (closure state)
+
+  https://github.com/o3de/o3de/pull/10214
+    filename = o3de_o3de_10214.txt
+    value = 14 (closure state)
+
+  https://github.com/o3de/o3de/pull/9564
+    filename = o3de_o3de_9564.txt
+    value = 14 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/18857
+    filename = aws_aws-cdk_18857.txt
+    value = 11 (closure state)
+
+  https://github.com/o3de/o3de/pull/9279
+    filename = o3de_o3de_9279.txt
+    value = 11 (closure state)
+
+Assignees - number of users assigned to the PR
+
+  Motivation: the PRs legitimately have these numbers of assignees.
+
+  https://github.com/kubernetes/kubernetes/pull/110418
+    filename = kubernetes_kubernetes_110418.txt
+    value = 7 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/108949
+    filename = kubernetes_kubernetes_108949.txt
+    value = 6 (middle state)
+
+  https://github.com/kubernetes/kubernetes/pull/109529
+    filename = kubernetes_kubernetes_109529.txt
+    value = 6 (middle state)
+
+  https://github.com/kubernetes/kubernetes/pull/109874
+    filename = kubernetes_kubernetes_109874.txt
+    value = 6 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/110416
+    filename = kubernetes_kubernetes_110416.txt
+    value = 6 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/110417
+    filename = kubernetes_kubernetes_110417.txt
+    value = 6 (closure state)
+
+  https://github.com/o3de/o3de/pull/10421
+    filename = o3de_o3de_10421.txt
+    value = 6 (middle state)
+
+  https://github.com/o3de/o3de/pull/9658
+    filename = o3de_o3de_9658.txt
+    value = 6 (ready state)
+
+  https://github.com/ray-project/ray/pull/25487
+    filename = ray-project_ray_25487.txt
+    value = 6 (closure state)
+
+  https://github.com/ray-project/ray/pull/25532
+    filename = ray-project_ray_25532.txt
+    value = 6 (closure state)
+
+Change_Requests - number of reviews that request changes
+
+  Motivation: the PRs legitimately have these numbers of change requests.
+
+  https://github.com/openhab/openhab-addons/pull/12357
+    filename = openhab_openhab-addons_12357.txt
+    value = 24 (closure state)
+
+  https://github.com/platformio/platformio-core/pull/3443
+    filename = platformio_platformio-core_3443.txt
+    value = 10 (closure state)
+
+  https://github.com/Revolutionary-Games/Thrive/pull/2459
+    filename = Revolutionary-Games_Thrive_2459.txt
+    value = 10 (closure state)
+
+  https://github.com/ethereum/remix-project/pull/1342
+    filename = ethereum_remix-project_1342.txt
+    value = 9 (closure state)
+
+  https://github.com/discordjs/guide/pull/551
+    filename = discordjs_guide_551.txt
+    value = 8 (closure state)
+
+  https://github.com/discordjs/guide/pull/638
+    filename = discordjs_guide_638.txt
+    value = 8 (closure state)
+
+  https://github.com/ls1intum/Artemis/pull/5028
+    filename = ls1intum_Artemis_5028.txt
+    value = 8 (closure state)
+
+  https://github.com/o3de/o3de/pull/10018
+    filename = o3de_o3de_10018.txt
+    value = 8 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12376
+    filename = openhab_openhab-addons_12376.txt
+    value = 8 (closure state)
+
+  https://github.com/Revolutionary-Games/Thrive/pull/3295
+    filename = Revolutionary-Games_Thrive_3295.txt
+    value = 8 (closure state)
+
+Changed_Files - number of files touched by the PR
+
+  Motivation: we tried to avoid files touched by automatically generated commits when computing this factor. This was because such commits did not reflect human actions and they tended to be huge. The heuristic failed to catch these cases in the samples below.
+
+  https://github.com/aws/aws-cdk/pull/20663
+    filename = aws_aws-cdk_20663.txt
+    value = 3248 (closure state)
+
+  https://github.com/Azure/azure-sdk-for-net/pull/29624
+    filename = Azure_azure-sdk-for-net_29624.txt
+    value = 2812 (closure state)
+
+  https://github.com/kubernetes-sigs/descheduler/pull/552
+    filename = kubernetes-sigs_descheduler_552.txt
+    value = 2531 (closure state)
+
+  https://github.com/Azure/azure-sdk-for-net/pull/28520
+    filename = Azure_azure-sdk-for-net_28520.txt
+    value = 2496 (ready state)
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/315
+    filename = eclipse-ee4j_jakartaee-tck_315.txt
+    value = 2484 (closure state)
+
+  https://github.com/decidim/decidim/pull/9484
+    filename = decidim_decidim_9484.txt
+    value = 2402 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/19502
+    filename = aws_aws-cdk_19502.txt
+    value = 2250 (closure state)
+
+  https://github.com/dotnet/runtime/pull/70913
+    filename = dotnet_runtime_70913.txt
+    value = 2209 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12103
+    filename = openhab_openhab-addons_12103.txt
+    value = 2011 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/20072
+    filename = aws_aws-cdk_20072.txt
+    value = 2006 (closure state)
+
+Conflicts - occurrences of the word "conflict" in the PR
+
+  Motivation: the largest value by far was caused by an error message that was pasted in a comment. The remaining values were mostly caused by bot and commit comments.
+
+  https://github.com/eclipse-m2e/m2e-core/pull/809
+    filename = eclipse-m2e_m2e-core_809.txt
+    value = 315 (middle state)
+
+  https://github.com/ethereum/remix-project/pull/1182
+    filename = ethereum_remix-project_1182.txt
+    value = 75 (closure state)
+
+  https://github.com/elastic/kibana/pull/134273
+    filename = elastic_kibana_134273.txt
+    value = 60 (closure state)
+
+  https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/5716
+    filename = FriendsOfPHP_PHP-CS-Fixer_5716.txt
+    value = 58 (ready state)
+
+  https://github.com/apache/hadoop/pull/4292
+    filename = apache_hadoop_4292.txt
+    value = 42 (closure state)
+
+  https://github.com/apache/hadoop/pull/3550
+    filename = apache_hadoop_3550.txt
+    value = 31 (closure state)
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/888
+    filename = eclipse-ee4j_jakartaee-tck_888.txt
+    value = 28 (closure state)
+
+  https://github.com/modin-project/modin/pull/4372
+    filename = modin-project_modin_4372.txt
+    value = 28 (closure state)
+
+  https://github.com/ethereum/remix-project/pull/2092
+    filename = ethereum_remix-project_2092.txt
+    value = 25 (closure state)
+
+  https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/5299
+    filename = FriendsOfPHP_PHP-CS-Fixer_5299.txt
+    value = 25 (closure state)
+
+Cross_References - number of cross-references to the PR
+
+  Motivation: the PRs legitimately have these numbers of cross-references.
+
+  https://github.com/prysmaticlabs/prysm/pull/9820
+    filename = prysmaticlabs_prysm_9820.txt
+    value = 28 (closure state)
+
+  https://github.com/Azure/azure-sdk-tools/pull/3351
+    filename = Azure_azure-sdk-tools_3351.txt
+    value = 26 (closure state)
+
+  https://github.com/decidim/decidim/pull/8950
+    filename = decidim_decidim_8950.txt
+    value = 24 (ready state)
+
+  https://github.com/bitwarden/server/pull/1681
+    filename = bitwarden_server_1681.txt
+    value = 23 (ready state)
+
+  https://github.com/owncloud/web/pull/7072
+    filename = owncloud_web_7072.txt
+    value = 21 (closure state)
+
+  https://github.com/babel/babel/pull/14601
+    filename = babel_babel_14601.txt
+    value = 20 (middle state)
+
+  https://github.com/kubernetes/kubernetes/pull/109111
+    filename = kubernetes_kubernetes_109111.txt
+    value = 20 (closure state)
+
+  https://github.com/prysmaticlabs/prysm/pull/9820
+    filename = prysmaticlabs_prysm_9820.txt
+    value = 19 (middle state)
+
+  https://github.com/Azure/azure-sdk-tools/pull/3342
+    filename = Azure_azure-sdk-tools_3342.txt
+    value = 18 (closure state)
+
+  https://github.com/elastic/docs/pull/1890
+    filename = elastic_docs_1890.txt
+    value = 18 (closure state)
+
+Discussion - number of discussion comments on the PR
+
+  Motivation: caused by many bot comments and legitimately long discussions.
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2053
+    filename = openshift_origin-aggregated-logging_2053.txt
+    value = 507 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2211
+    filename = openshift_origin-aggregated-logging_2211.txt
+    value = 490 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2076
+    filename = openshift_origin-aggregated-logging_2076.txt
+    value = 298 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2075
+    filename = openshift_origin-aggregated-logging_2075.txt
+    value = 285 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12357
+    filename = openhab_openhab-addons_12357.txt
+    value = 261 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2051
+    filename = openshift_origin-aggregated-logging_2051.txt
+    value = 254 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2118
+    filename = openshift_origin-aggregated-logging_2118.txt
+    value = 204 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2133
+    filename = openshift_origin-aggregated-logging_2133.txt
+    value = 186 (closure state)
+
+  https://github.com/scummvm/scummvm/pull/3368
+    filename = scummvm_scummvm_3368.txt
+    value = 155 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2134
+    filename = openshift_origin-aggregated-logging_2134.txt
+    value = 144 (closure state)
+
+Events - number of timeline events on the PR
+
+  Motivation: caused by many comments from bots or users running bot commands.
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2211
+    filename = openshift_origin-aggregated-logging_2211.txt
+    value = 3945 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2118
+    filename = openshift_origin-aggregated-logging_2118.txt
+    value = 2587 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2053
+    filename = openshift_origin-aggregated-logging_2053.txt
+    value = 1154 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/109111
+    filename = kubernetes_kubernetes_109111.txt
+    value = 1044 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12357
+    filename = openhab_openhab-addons_12357.txt
+    value = 998 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7103
+    filename = kubevirt_kubevirt_7103.txt
+    value = 767 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/8051
+    filename = kubevirt_kubevirt_8051.txt
+    value = 710 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7336
+    filename = kubevirt_kubevirt_7336.txt
+    value = 696 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2076
+    filename = openshift_origin-aggregated-logging_2076.txt
+    value = 684 (closure state)
+
+  https://github.com/kyma-project/busola/pull/1336
+    filename = kyma-project_busola_1336.txt
+    value = 682 (closure state)
+
+Fixes - number of references to other issues and PRs
+
+  Motivation: the largest value by far was caused by a stack trace in a comment. The remaining values were mostly caused by legitimately large PRs.
+
+  bad heuristic
+  https://github.com/zkSNACKs/WalletWasabi/pull/8456
+    filename = zkSNACKs_WalletWasabi_8456.txt
+    value = 898 (closure state)
+
+  legit
+  https://github.com/go-gitea/gitea/pull/18470
+    filename = go-gitea_gitea_18470.txt
+    value = 618 (ready state)
+
+  legit
+  https://github.com/elastic/kibana/pull/134273
+    filename = elastic_kibana_134273.txt
+    value = 501 (closure state)
+
+  legit
+  https://github.com/grafana/grafana/pull/51858
+    filename = grafana_grafana_51858.txt
+    value = 494 (closure state)
+
+  bad heuristic
+  https://github.com/modin-project/modin/pull/2760
+    filename = modin-project_modin_2760.txt
+    value = 482 (ready state)
+
+  legit
+  https://github.com/vis2k/Mirror/pull/2303
+    filename = vis2k_Mirror_2303.txt
+    value = 402 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12689
+    filename = openhab_openhab-addons_12689.txt
+    value = 385 (closure state)
+
+  https://github.com/Oneflow-Inc/oneflow/pull/7516
+    filename = Oneflow-Inc_oneflow_7516.txt
+    value = 375 (closure state)
+
+  https://github.com/Oneflow-Inc/oneflow/pull/7655
+    filename = Oneflow-Inc_oneflow_7655.txt
+    value = 366 (ready state)
+
+  https://github.com/aws/aws-cdk/pull/20072
+    filename = aws_aws-cdk_20072.txt
+    value = 362 (closure state)
+
+Intermission - average time between PR timeline events, in minutes
+
+  Motivation: legimitately caused by massive inactivity.
+
+  https://github.com/spring-projects/spring-framework/pull/24624
+    filename = spring-projects_spring-framework_24624.txt
+    value = 891298 (middle state)
+
+  https://github.com/spring-projects/spring-framework/pull/24666
+    filename = spring-projects_spring-framework_24666.txt
+    value = 878914 (middle state)
+
+  https://github.com/spring-projects/spring-framework/pull/24803
+    filename = spring-projects_spring-framework_24803.txt
+    value = 853695 (middle state)
+
+  https://github.com/spring-projects/spring-framework/pull/25491
+    filename = spring-projects_spring-framework_25491.txt
+    value = 674566 (middle state)
+
+  https://github.com/backdrop/backdrop/pull/2886
+    filename = backdrop_backdrop_2886.txt
+    value = 620782 (middle state)
+
+  https://github.com/tensorflow/serving/pull/1445
+    filename = tensorflow_serving_1445.txt
+    value = 605362 (closure state)
+
+  https://github.com/tensorflow/serving/pull/1449
+    filename = tensorflow_serving_1449.txt
+    value = 601463 (closure state)
+
+  https://github.com/tensorflow/serving/pull/1455
+    filename = tensorflow_serving_1455.txt
+    value = 584962 (closure state)
+
+  https://github.com/tensorflow/serving/pull/1477
+    filename = tensorflow_serving_1477.txt
+    value = 549460 (middle state)
+
+  https://github.com/spring-projects/spring-framework/pull/26058
+    filename = spring-projects_spring-framework_26058.txt
+    value = 527408 (middle state)
+
+Labels - number of labels
+
+  Motivation: legimitately caused by many labels.
+
+  https://github.com/Automattic/jetpack/pull/24601
+    filename = Automattic_jetpack_24601.txt
+    value = 88 (middle state)
+
+  https://github.com/Automattic/jetpack/pull/24600
+    filename = Automattic_jetpack_24600.txt
+    value = 80 (ready state)
+
+  https://github.com/Automattic/jetpack/pull/24780
+    filename = Automattic_jetpack_24780.txt
+    value = 70 (closure state)
+
+  https://github.com/Automattic/jetpack/pull/24661
+    filename = Automattic_jetpack_24661.txt
+    value = 64 (closure state)
+
+  https://github.com/apache/beam/pull/21749
+    filename = apache_beam_21749.txt
+    value = 51 (closure state)
+
+  https://github.com/Automattic/jetpack/pull/24678
+    filename = Automattic_jetpack_24678.txt
+    value = 50 (closure state)
+
+  https://github.com/Automattic/jetpack/pull/24995
+    filename = Automattic_jetpack_24995.txt
+    value = 50 (ready state)
+
+  https://github.com/apache/beam/pull/17727
+    filename = apache_beam_17727.txt
+    value = 49 (middle state)
+
+  https://github.com/jupyterlab/jupyterlab/pull/12777
+    filename = jupyterlab_jupyterlab_12777.txt
+    value = 43 (ready state)
+
+  https://github.com/jupyterlab/jupyterlab/pull/12782
+    filename = jupyterlab_jupyterlab_12782.txt
+    value = 42 (ready state)
+
+Mentions - number of @-mentions
+
+  Motivation: caused by what appears to be bugged timeline data from GitHub.
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2211
+    filename = openshift_origin-aggregated-logging_2211.txt
+    value = 1721 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2118
+    filename = openshift_origin-aggregated-logging_2118.txt
+    value = 1174 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/8051
+    filename = kubevirt_kubevirt_8051.txt
+    value = 321 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2053
+    filename = openshift_origin-aggregated-logging_2053.txt
+    value = 317 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7103
+    filename = kubevirt_kubevirt_7103.txt
+    value = 290 (closure state)
+
+  https://github.com/openshift/origin-aggregated-logging/pull/2064
+    filename = openshift_origin-aggregated-logging_2064.txt
+    value = 288 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/109111
+    filename = kubernetes_kubernetes_109111.txt
+    value = 285 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7324
+    filename = kubevirt_kubevirt_7324.txt
+    value = 266 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7336
+    filename = kubevirt_kubevirt_7336.txt
+    value = 261 (closure state)
+
+  https://github.com/kubevirt/kubevirt/pull/7687
+    filename = kubevirt_kubevirt_7687.txt
+    value = 253 (closure state)
+
+Milestones - number of milestones this PR contributes to
+
+  Motivation: none needed, the largest values are not abnormally large.
+
+  https://github.com/calcom/cal.com/pull/2671
+    filename = calcom_cal.com_2671.txt
+    value = 4 (closure state)
+
+  https://github.com/Automattic/sensei/pull/5348
+    filename = Automattic_sensei_5348.txt
+    value = 2 (closure state)
+
+  https://github.com/contao/contao/pull/4604
+    filename = contao_contao_4604.txt
+    value = 2 (middle state)
+
+  https://github.com/modin-project/modin/pull/2079
+    filename = modin-project_modin_2079.txt
+    value = 2 (closure state)
+
+  https://github.com/spring-projects/spring-framework/pull/28736
+    filename = spring-projects_spring-framework_28736.txt
+    value = 2 (middle state)
+
+  https://github.com/apache/cloudstack/pull/6495
+    filename = apache_cloudstack_6495.txt
+    value = 1 (closure state)
+
+  https://github.com/apache/cloudstack/pull/6496
+    filename = apache_cloudstack_6496.txt
+    value = 1 (closure state)
+
+  https://github.com/apache/cloudstack/pull/6502
+    filename = apache_cloudstack_6502.txt
+    value = 1 (closure state)
+
+  https://github.com/apache/cloudstack/pull/6503
+    filename = apache_cloudstack_6503.txt
+    value = 1 (closure state)
+
+  https://github.com/apache/cloudstack/pull/6513
+    filename = apache_cloudstack_6513.txt
+    value = 1 (closure state)
+
+Participants - number of participants on the PR
+
+  Motivation: caused by PRs with legitimately many participants.
+
+  https://github.com/openhab/openhab-addons/pull/12103
+    filename = openhab_openhab-addons_12103.txt
+    value = 88 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12131
+    filename = openhab_openhab-addons_12131.txt
+    value = 88 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12110
+    filename = openhab_openhab-addons_12110.txt
+    value = 84 (closure state)
+
+  https://github.com/backdrop/backdrop/pull/4033
+    filename = backdrop_backdrop_4033.txt
+    value = 71 (closure state)
+
+  https://github.com/dotnet/runtime/pull/70913
+    filename = dotnet_runtime_70913.txt
+    value = 71 (closure state)
+
+  https://github.com/kubernetes/kubernetes/pull/110599
+    filename = kubernetes_kubernetes_110599.txt
+    value = 69 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12674
+    filename = openhab_openhab-addons_12674.txt
+    value = 68 (ready state)
+
+  https://github.com/apache/tvm/pull/11703
+    filename = apache_tvm_11703.txt
+    value = 65 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12689
+    filename = openhab_openhab-addons_12689.txt
+    value = 64 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/20072
+    filename = aws_aws-cdk_20072.txt
+    value = 63 (closure state)
+
+PR_Commits - number of commits in the PR
+
+  Motivation: caused by an API limitation because GitHub's data limits the number of PR commits to 250.
+
+  https://github.com/bitwarden/server/pull/1261
+    filename = bitwarden_server_1261.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/2643
+    filename = chatwoot_chatwoot_2643.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/2732
+    filename = chatwoot_chatwoot_2732.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/2836
+    filename = chatwoot_chatwoot_2836.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/2873
+    filename = chatwoot_chatwoot_2873.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/2899
+    filename = chatwoot_chatwoot_2899.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/3012
+    filename = chatwoot_chatwoot_3012.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/3203
+    filename = chatwoot_chatwoot_3203.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/3214
+    filename = chatwoot_chatwoot_3214.txt
+    value = 250.0 (closure state)
+
+  https://github.com/chatwoot/chatwoot/pull/3436
+    filename = chatwoot_chatwoot_3436.txt
+    value = 250.0 (closure state)
+
+Review_Comments - number of review comments on the PR
+
+  Motivation: caused by legitimately many reviews.
+
+  https://github.com/openhab/openhab-addons/pull/12357
+    filename = openhab_openhab-addons_12357.txt
+    value = 339 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12001
+    filename = openhab_openhab-addons_12001.txt
+    value = 234 (closure state)
+
+  https://github.com/Revolutionary-Games/Thrive/pull/3106
+    filename = Revolutionary-Games_Thrive_3106.txt
+    value = 214 (closure state)
+
+  https://github.com/openhab/openhab-addons/pull/12440
+    filename = openhab_openhab-addons_12440.txt
+    value = 175 (closure state)
+
+  https://github.com/LycheeOrg/Lychee/pull/1101
+    filename = LycheeOrg_Lychee_1101.txt
+    value = 172 (closure state)
+
+  https://github.com/fwupd/fwupd/pull/4746
+    filename = fwupd_fwupd_4746.txt
+    value = 165 (closure state)
+
+  https://github.com/LycheeOrg/Lychee/pull/1217
+    filename = LycheeOrg_Lychee_1217.txt
+    value = 147 (closure state)
+
+  https://github.com/Oneflow-Inc/oneflow/pull/7607
+    filename = Oneflow-Inc_oneflow_7607.txt
+    value = 146 (closure state)
+
+  https://github.com/scummvm/scummvm/pull/3406
+    filename = scummvm_scummvm_3406.txt
+    value = 134 (closure state)
+
+  https://github.com/TileDB-Inc/TileDB/pull/3041
+    filename = TileDB-Inc_TileDB_3041.txt
+    value = 132 (closure state)
+
+Test_Files - number of test files touched by the PR
+
+  Motivation: see the motivation for Changed_Files.
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/315
+    filename = eclipse-ee4j_jakartaee-tck_315.txt
+    value = 2378 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/20663
+    filename = aws_aws-cdk_20663.txt
+    value = 2182 (closure state)
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/218
+    filename = eclipse-ee4j_jakartaee-tck_218.txt
+    value = 1399 (closure state)
+
+  https://github.com/babel/babel/pull/13191
+    filename = babel_babel_13191.txt
+    value = 1219 (closure state)
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/321
+    filename = eclipse-ee4j_jakartaee-tck_321.txt
+    value = 1198 (closure state)
+
+  https://github.com/Azure/azure-sdk-for-net/pull/29339
+    filename = Azure_azure-sdk-for-net_29339.txt
+    value = 1021 (closure state)
+
+  https://github.com/aws/aws-cdk/pull/20026
+    filename = aws_aws-cdk_20026.txt
+    value = 1018 (ready state)
+
+  https://github.com/aws/aws-cdk/pull/20072
+    filename = aws_aws-cdk_20072.txt
+    value = 1011 (closure state)
+
+  https://github.com/eclipse-ee4j/jakartaee-tck/pull/316
+    filename = eclipse-ee4j_jakartaee-tck_316.txt
+    value = 942 (ready state)
+
+  https://github.com/aws/aws-cdk/pull/19904
+    filename = aws_aws-cdk_19904.txt
+    value = 910 (closure state)
