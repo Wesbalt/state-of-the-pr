@@ -1,0 +1,29 @@
+These are the templates used to generate survey invites to GitHub users and authors of related works.
+
+-------------------- Template for GitHub users --------------------
+
+EMAIL SUBJECT: Invitation to quick survey about pull requests
+
+EMAIL BODY: Hi <name>,
+
+my name is Balthazar West and I am doing my Master's thesis in Computer Science at KTH. The main theme of the thesis is investigating how pull requests are developed on GitHub and I would like to invite you personally to my survey due to your activity in the <repo> repository. The survey is linked below, completion time is ~10 minutes and your response is anonymous. Feel free to share it with your peers as well. If you are interested in the results of my work, please respond to this email and I will share them once the thesis is finished. Thank you for reading and sorry if I wasted your time.
+
+Survey: <link>
+
+Best regards,
+Balthazar West
+
+-------------------- Template for authors -------------------------
+
+Email subject: A thank you and a survey invitation about pull requests
+
+Email body: Hello <name>,
+
+my name is Balthazar West and I am a Master's student at KTH in Sweden. I am doing my thesis in Computer Science with the main theme of investigating how pull requests are developed on GitHub. I would like to thank you for your paper <paper> as it has been a valuable related work and also an interesting contribution to this field of research. For this reason, I believe you can bring a unique perspective to my survey linked below. The survey is meant for anyone who has judged or developed pull requests on GitHub recently so I encourage you to share it with your peers if possible.
+
+The completion time is ~10 minutes and your response is anonymous. I would appreciate it greatly if you could respond to or share the survey linked below. If not, I apologize for wasting your time. If you are interested in the results of my work, please respond to this email and I will share them once the thesis is finished. Lastly, I want to mention my work will include a long table summarizing the previously studied pull request factors in the related works and you may find that particularly interesting to see.
+
+Survey: <link>
+
+Best regards,
+Balthazar West

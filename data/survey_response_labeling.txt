@@ -1,0 +1,579 @@
+This is the labeling of the free-text survey responses. Labels that already exist as a multiple-choice option in the survey are suffixed with "(already exists)". The responses are indexed according to their row in "survey_responses_raw.csv"
+
+The labeling follows this syntax:
+RX (X being the index of the response)
+Text: raw response from the respondent
+Label: chosen label
+
+Reviewer question: If you can think of additional aspects you value [for the first impression of a PR], please describe them and their influence.
+
+    R7
+    Text: risk vs necessity (important)
+    Label: Risk vs necessity of accepting the changes
+
+    R8
+    Text: Code maintanability
+    Label: Code maintainability
+
+    R15
+    Text: None
+    No label!
+
+    R20
+    Text: Does it fit general goals of the project? If it doesn't, there's no point of reviewing it further.
+    Label: Project fitness
+
+    R19
+    Text: Organization of the merge/pull request in digestible commits, though, compared to Gerrit or a mailing list based workflow, GitHub and GitLab make it very hard to review individual commits; also topic focused merge/pull requests
+    Label: Organization of the commits
+
+    R30
+    Text: Task description: Very important
+    Label: Presence of a task description
+
+    R32
+    Text: We use Jira for issue-tracking, so a JIRA ID in the PR title is important.
+    Label: Presence of a Jira ID in the PR title
+
+    R33
+    Text: How far behind the merge base is against the target branch
+    Label: Distance between the merge base and the target branch
+
+    R47
+    Text: Reproducibility of the bug/feature/fix are "very important"
+    Label: Reproducibility of the addressed bug
+
+    R55
+    Text: I personally care less about new features and more about performance improvements/bug fixes. If a PR has failed CI or conflicts, I usually won't even look it over, as the contributor has more work to do before it's ready to review.
+    Label 1: Whether a bug is addressed
+    Label 2: Performance improvement of the changes
+
+    R67
+    Text: Reducing code complexity
+    Label: Code complexity (already exists)
+
+    R70
+    Text: Project stage in the development life cycle. While welcome, pull requests early on in the project development is highly discouraged. 
+    Label: When the pull request was opened in the development life cycle
+
+    R88
+    Text: Code Decoupling in a Pull Request is also very important for me.
+    Label: Whether the changes decouple code
+
+    R92
+    Text: The "business" side of the contribution. A typo solved can help with the first impression, a flag change can make the program simpler to be used, it preferably can't break a already working component and needs to be generic enough for the scope of the program. Presence of labels are often automatic by using bots so mostly we trust that the bot is adding the right labels.
+    No label!
+
+    R93
+    Text: Clarity of code, willingness to change and adapt, doing it right in the larger perspective
+    Label 1: Code readability
+    Label 2: The submitter's willingness to adapt
+
+    R94
+    Text: Personally, I think compliance to project scope is the most important thing when it comes to pull requests that introduce new features. Obviously, this doesn't apply to other pull requests. It may be the perfect pull request, but if it implements a feature that is outside of the project's scope, then it would be useless to me as a project maintainer. However, it would still be valuable for people that may want this feature anyway and can't implement it themselves.
+    Label: Project fitness
+
+    R98
+    Text: If it's the persons very first contribution on GitHub I will try to be very careful with how I respond; use more positive and engaging language etc.
+    Label: Whether the submitter is a newcomer on GitHub
+
+    R112
+    Text: Following community guidelines
+    Label: Compliance to repository standards (already exists)
+
+    R117
+    Text: I have seen some OSS repos require committer to open an issue to discuss first before filing a PR. (homebrew-core does generally not need that though)
+    No label!
+
+    R126
+    Text: We have a bot that applies all labels. We Also don't use milestones, and I don't review code PRs. So I marked all of them as 'not sure' since there wasn't a 'not applicable' option.
+    No label!
+
+    R131
+    Text: Code readability
+    Label: Code readability
+
+    R132
+    Text: Scope of the pull request. If PR is big and refactoring is the majority of changes, I usually prefer splitting the PR into two (or many parts)
+    Label: Atomicity of the changes
+
+    R133
+    Text: Clean, readable, and patch for specific part of code makes it easier to review.
+    Label: Clean patch
+
+    R137
+    Text: Compliance to repository standards: I added not important because CI should enforce it else it’s not a real standard. The most important thing for a large repository is that they create an issue first or feature request before they do the work because it’s always likely that the PR is not getting accepted if a feature doesn’t make sense.
+    Label 1: Whether the changes have been discussed in an issue before hand
+    Label 2: Project fitness
+
+    R148
+    Text: Responsiveness of the submitter
+    Label: Responsiveness of the submitter (already exists)
+
+    R149
+    Text: Clear explanation with some examples or tests.
+    Label: Clear language in the title / description (already exists)
+
+    R152
+    Text: Along with the code itself, a clear description of the intent and content of the code change is valuable. I want to know why the change is being made and a summary of the changes themselves.
+    Label 1: Presence of a task description
+    Label 2: Presence of a summary of the changes
+
+    R154
+    Text: A users credibility is reduced if he/she/they pull request a code that is more bad than the previous one.
+    No label!
+
+    R168
+    Text: Good communication to explain the problem found and solved
+    Label: Presence of a task description
+
+    R173
+    Text: It might be part of "code complexity", but I'd add a "very important" influence is the relationship of the changes in the PR to each other. Notably, I want the PR to represent a single atomic set of necessary pieces, and I want separate, unrelated changes to go in separate PRs. This is fighting against engineers' tendencies (my own included) to throw small fixes into a PR which aren't actually necessary to the change, as any extra changes can cause issues. In other words: a PR should represent one targeted fix/issue, and not carry along extraneous changes.
+    Label: Atomicity of the changes
+
+    R175
+    Text: The quality of the user experience of the feature/bug/etc. added by the PR - Important
+    Label: The quality of the user experience created by the changes
+
+    R178
+    Text: For tests, it is often valuable to explain precisely how the test fails if the main code change were to be reverted. This proves that the submitter actually used TDD, or at least double-checked that the new coverage will prevent regressions. For nontrivial PRs, it is helpful for the submitter to self-review, calling out noteworthy changes and their justification, noting areas in which they are unsure and could use advice, etc. (Code comments are appropriate for things which should _remain_ in the text after the PR is merged. These review comments should be limited to discussion of what is being _changed_ from the previous state.)
+    Label: Presence of self-review
+
+    R192
+    Text: It's crucial whether the PR author is from an organization I know (e.g., my or a friendly company). This gives me a significant "trust boost" towards the quality and intentions of the person.
+    Label: Submitter affiliation
+
+    R193
+    Text: Is it fixing a security vulnerability? Is it fixing a bug? Is it implementing a new feature?
+    Label 1: Whether a security vulnerability is addressed
+    Label 2: Whether a bug is addressed
+    Label 3: Whether a feature is added (already exists)
+
+    R195
+    Text: How active the submitter is to the PR (don't want a PR lasting for months)
+    Label: Responsiveness of the submitter (already exists)
+
+    R204
+    Text: Previous discussion on the forum or the issue tracker about the feature or fix being added makes my life much easier.
+    Label: Whether the changes have been discussed in an issue before hand
+
+Reviewer question: If you can think of additional ways you respond [to PRs], please describe them and how often you use them.
+
+    R33
+    Text: I edit the pull request (either the code, the title, or the description)
+    Label: I edit the pull request (e.g., the code and title)
+
+    R34
+    Text: Another thing is how much priority does this PR have and whether or not it is affecting the part of application that is going to be refurbished soon. It is important so that we save ours and other person's time in contributing to the project.
+    No label!
+
+    R47
+    Text: Positive feedback, nice words - very often.
+    Label: I give positive feedback and use nice words
+
+    R55
+    Text: Questions answered as "not sure" are things I do not have permissions or responsibility over.
+    No label!
+
+    R67
+    Text: Askin for a benchmark
+    Label: I ask for a benchmark
+
+    R73
+    Text: Occasionally ask to rearrange order or change number of commits in PR by rebase
+    Label: I ask the submitter to rebase their commits
+
+    R84
+    Text: "I ask the submitter to motivate their decisions in the pull request" - this is an either/or proposition for me, not really a range, i.e. if something needs explained I 100% request an explanation for a code block/method otherwise it never happens.
+    No label!
+
+    R92
+    Text: For nixpkgs we have our telegram group to ask for reviews (NixOS Brasil). For youtube-dl I just realized it would be simpler to use if you don't have to remember which flags are embed or add by accepting both
+    No label!
+
+    R93
+    Text: Labels are more relevant to associated issues. PRs are ephemeral.
+    No label!
+
+    R98
+    Text: I link my comments on code with examples sometimes or topics on Stackoverflow if required
+    Label: I include code examples in my comments
+
+    R105
+    Text: I download the PR to test the change for myself (e.g. benchmarks, or to test an issue that can't be tested in unit tests)
+    Label: I test the pull request locally
+
+    R117
+    Text: stale action is a good way to keep the PRs still on track.
+    No label!
+
+    R129
+    Text: I link the PR to open issues if there's any available, using special GitHub magic words like "Resolves #9999"
+    Label: I link the pull request to an issue
+
+    R137
+    Text: Most important thing is that they can explain why this feature need to exists and why it should be part of this repo instead of a fork or an extension
+    No label!
+
+    R173
+    Text: Providing suggestions via GitHub's UI to show I feel strongly enough about my comment to provide assistance to the submitter (especially if it is a minor change), so they can just "accept" and add it as a commit if they agree.
+    Label: I suggest specific code changes that can be automatically applied
+
+    R178
+    Text: I will ask for explicit confirmation that some aspect of the change was tested, if it would be impractical to cover with automated tests.
+    Label: I ask for confirmation that parts not covered by automated tests have been tested
+
+    R196
+    Text: Sometimes I just merge the pr, and fix tiny flaws myself in order to keep frustration level low
+    Label: I merge the pull request and fix tiny flaws myself
+
+    R199
+    Text: suggest specific code changes
+    Label: I provide specific feedback on lines of code (already exists)
+
+    R204
+    Text: I ask users to run integration tests which don't run on the CI
+    Label: I ask the submitter to run integration tests
+
+    R205
+    Text: I often ping people or discuss aspects of the PR outside of GitHub, for example on Google Meet or Slack.  
+    Label: I discuss the pull request outside GitHub
+
+Reviewer question: If you can think of additional aspects you value [for the final decision of a PR], please describe them and their influence.
+
+    R33
+    Text: Age of the pull request
+    Label: Age of the pull request
+
+    R47
+    Text: Whether ALL feedback was taken into account, very important.
+    Label: States of the code reviews by other users (already exists)
+
+    R54
+    Text: "whether there is conflict" is confusing to me, I have no idea what does it mean in all of those questions - if there is a merge conflict, it just has to be resolved before merge, it is very important as that prevents the PR from being merged, that's kinda a give and not something that I "consider". I mean - either the author resolves the conflict or I end up resolving it if the PR is important and we need to land it in a timely manner. interactions with the submitter and other aspect like that - this is important, for me, to sometimes get me to looking at a PR in the first place, but has no (little) impact on the decision to land it, if the code is good/in line with the codebase goals etc then it's going to be merged (if it got reviewed)
+    Label: Whether the changes improve the project
+
+    R88 (moved from the previous question because it fits here better)
+    Text: If it's a bug fix, all tests are passing and the number of deletions of lines is greater than the number of additions it will be merged right away after a quick review.
+    Label: Whether the deletions exceed the additions for a bug fix while all tests pass
+
+    R92
+    Text: I almost never do final decisions but I can approve the PR via code review
+    No label!
+
+    R93
+    Text: Again, PR text not important, associated issue is. I answered assuming both. I squash and override commit messages.
+    No label!
+
+    R117
+    Text: I know it is not industry std yet, but encrypt the commit and sign-off is something that we are actively pushing.
+    Label: Whether the commits are encrypted and signed off
+
+    R126
+    Text: I can manuall edit the PR title and description so I clarify it myself if necessary
+    No label!
+
+    R131
+    Text: I absolutely hate when PR authors take criticism about their code personally. I also really dislike it when PR authors mark my conversations as resolved. It's the reviewer's job to mark the conversation as resolved when they are satisfied with the changes. One exception to this is when the proposed changes are provided inline through the "suggestion" feature of GitHub, in which case there is no need for the reviewer to mark those as resolved.
+    No label!
+
+    R137
+    Text: Everything I marked as very important are necessary to get things merged. Things need to be maintainable. People might do a PR but we have to maintain it.
+    No label!
+
+    R155
+    Text: It matters a lot to me whether something is in a critical code path or part of an important component (in which case the bar is higher)
+    Label: Whether the changes target a critical code path or component
+
+    R196
+    Text: The most important aspect is, whether or not the code does an improvement to the project
+    Label: Whether the changes improve the project
+
+    R204
+    Text: Making pull requests not too big. Large pull requests are really difficult to review and need discussion in an issue first.
+    Label 1: Size (number of commits or changed files / lines) (already exists)
+    Label 2: Whether the changes have been discussed in an issue before hand
+
+Submitter question: If you can think of additional ways you prepare [PRs], please describe them and how often you use them.
+
+    R28
+    Text: None at the moment
+    No label!
+
+    R34
+    Text: Should have all the commits squashed up
+    Label: I change the PR commit history
+
+    R42
+    Text: Make sure the pull requests are absolutely necessary i.e. fixes feature breaking bugs but not for personal preference
+    Label: I make sure my changes are important / relevant
+
+    R47
+    Text: Looking at when the last PR was merged, or if my efforts would be in vain - very often.
+    Label: I check the repository's history of responding to pull requests
+
+    R48
+    Text: It's impossible for contributors to add tags or milestones in foregn repos. Neither assigning PRs to a pesron is possible
+    No label!
+
+    R50
+    Text: I think the most important thing is that your modification of the code conforms to the development intention of the repository.
+    Label: I make sure my changes are important / relevant
+
+    R53
+    Text: I very often submit PRs of things I need fixed to make it work on my app/project
+    No label!
+
+    R71
+    Text: Definitely no emojis, ever.
+    No label!
+
+    R88
+    Text: I avoid unnecessary and white space changes.
+    Label: I make sure my changes are important / relevant
+
+    R92
+    Text: WIP PR until CI passes
+    Label: I make sure the Continuous Integration build succeeds (already exists)
+
+    R112
+    Text: I discuss the topic with the maintainer before starting my work
+    Label: I discuss with the maintainer before starting
+
+    R131
+    Text: I type-annotate all the code
+    Label: I type-annotate my code
+
+    R137
+    Text: If it’s a repo I maintain, I do what I put on the above list. If it’s something I don’t own, I always create an issue first or make sure an issue exists. And I always create draft PR for the first CI checks to pass so reviewers know it’s not ready.
+    Label 1: I make sure an issue exists or create one
+    Label 2: I make sure the Continuous Integration build succeeds (already exists)
+
+    R145
+    Text: I often spend some time cleaning up my branch's commit history before submitting it as a PR. (Squashing commits, rewording commit messages, etc.)
+    Label: I change the PR commit history
+
+    R152
+    Text: If there is anything that will be added as a follow-up to the pull request I make sure to mention it.
+    Label: I mention follow-up PRs that will be created after merging my changes
+
+    R167
+    Text: Follow additional conventions laid out by the PR / issue template
+    Label: I follow the submission guidelines of this repository (already exists)
+
+    R170
+    Text: I check what sort of contributions are welcome at all via the submission guidelines and how issues and other PRs have been responded to.
+    Label 1: I make sure my changes are important / relevant
+    Label 2: I check the repository's history of responding to pull requests
+
+    R178
+    Text: I will self-review and try to anticipate everything a reviewer might ask about.
+    Label: I self-review the pull request
+
+    R189
+    Text: idk man I've only submitted two to open source and they were both documentation edits; one was just a typo
+    No label!
+
+    R193
+    Text: I make sur my PR fix one issue so it's easy to review. It's a bit more work, but it's better for the reviewers.
+    Label: I make sure my changes are easily reviewed
+
+    R204
+    Text: Search issues first, then make an issue if one isn't relevant, then make the pull request referring to the issue.
+    Label: I make sure an issue exists or create one
+
+Submitter question: If you can think of additional ways you respond [to feedback], please describe them and how often you use them.
+
+    R28
+    Text: None at the moment
+    No label!
+
+    R33
+    Text: I amend my existing commits
+    Label: I change the PR commit history
+
+    R53
+    Text: I make sure the reviewers know my original intent and not force them to accept my PR in any way. It’s their library and I’m just helping 
+    Label: I clarify / elaborate my intent with the pull request (already exists)
+
+    R55
+    Text: Force push is the answer to life's challanges
+    Label: I change the PR commit history
+
+    R71
+    Text: The previous question erroneously makes it seem as if one is competing with other pull requests for the throne, or as it there are countless PRs against a single issue, and that one needs to "dress up" a PR with random changes to approve acceptance. The reality is that a PR is merely a suggested improvement. If the improvement is wanted, the approach might be questioned. If the approach is wanted, the implementation details/hygiene might be questioned. When no questions remain it is either merged or declined. Any change you make is not random stuff to increase chance of acceptance, but direct responses to review comments or discussions.
+    Label: I adjust my pull request to address discussion / review comments
+
+    R88
+    Text: I sometimes argue with the reviewers.
+    Label: I assure the reviewer that nothing is wrong with my pull request (exists already)
+
+    R92
+    Text: On PRs with more strict commit policies, and others by habit, I often commit --amend + force push. nixpkgs, for example, has a very specific commit policy so increments kinda must be this way.
+    Label: I change the PR commit history
+
+    R110
+    Text: I don't think I've ever encountered a "competing pull request", if there's a functional solution then it is a waste of my effort to solve it in a different way.
+    No label!
+
+    R112
+    Text: I provide screen captures of any UI changes I might have made
+    Label: I show examples of UI changes I have made
+
+    R131
+    Text: I create individual commits for each discussion and reference them in the discussion, as "fixed in abcdefg123", and I also let the reviewers close the discussions themselves.
+    Label: I adjust my pull request to address discussion / review comments
+
+    R137
+    Text: It’s simple if the reviewers want me to change tests, … I will do that until it gets merged. I don’t create a competing PR, that’s just stupid because others have done the work. I might review their PR to improve it or test it.
+    Label: I make additional commits that add tests (already exists)
+
+    R167
+    Text: Rebase my commits to clean them up into a logical progression that's more easily reviewed
+    Label: I change the PR commit history
+
+    R207
+    Text: I usually amend existing commits rather than adding new commits.  
+    Label: I change the PR commit history
+
+Demographic question: What is your computer science domain?
+
+    R13
+    Text: Electronics and embedded
+    Label: Embedded systems
+
+    R19
+    Text: System architect
+    Label: System architect
+
+    R26
+    Text: Embedded systems
+    Label: Embedded Systems
+
+    R32
+    Text: Educational Content (non-academia)
+    Label: Educational content
+
+    R33
+    Text: IT Infrastructure
+    Label: IT Infrastructure
+
+    R36
+    Text: virtual reality, human-computer interaction
+    Label: Virtual reality
+
+    R38
+    Text: Embedded
+    Label: Embedded systems
+
+    R55
+    Text: Internet Publishing / Sysadmin stuff
+    Label: Sysadmin
+
+    R63
+    Text: Mobile
+    Label: Mobile
+
+    R64
+    Text: DevOps
+    Label: Devops
+
+    R70
+    Text: DevOps
+    Label: DevOps
+
+    R73
+    Text: Computer engineering
+    Label: Computer Engineering
+
+    R78
+    Text: Operations
+    Label: DevOps
+
+    R85
+    Text: Embedded
+    Label: Embedded systems
+
+    R86
+    Text: Fullstack Development but backend is preferred
+    Label: Fullstack development
+
+    R93
+    Text: Distributed systems, high availability, high performance
+    Label: Distributed systems
+
+    R99
+    Text: GUI Tooling
+    Label: Graphics or Visualization (exists already)
+
+    R102
+    Text: IoT/Firmware
+    Label: IoT
+
+    R112
+    Text: Development Tools and Software Automation
+    Label: DevOps
+
+    R113
+    Text: natural language processing
+    Label: ML / AI (exists already)
+
+    R119
+    Text: Embedded realtime
+    Label: Embedded systems
+
+    R128
+    Text: Operating systems
+    Label: operating systems
+
+    R133
+    Text: Networking
+    Label: Networking
+
+    R138
+    Text: Embedded Development
+    Label: Embedded systems
+
+    R140
+    Text: Mobile application development
+    Label: Mobile
+
+    R142
+    Text: Systems administration/engineering
+    Label: Sysadmin
+
+    R145
+    Text: Video games
+    Label: Video games
+
+    R161
+    Text: Embedded systems
+    Label: Embedded Systems
+
+    R175
+    Text: Developer Utilities
+    Label: DevOps
+
+    R186
+    Text: Accessibility
+    Label: Accessibility
+
+    R196
+    Text: Software Reverse Engineering and Emulation
+    Label: Reverse engineering
+
+    R199
+    Text: Site Reliability/Production Engineer
+    Label: Security (exists already)
+
+    R200
+    Text: Scientific programming
+    Label: Scientific programming
+
+    R203
+    Text: Embedded Systems, Machine Control
+    Label: Embedded systems
+
+    R206
+    Text: Product Management
+    Label: Software product lines

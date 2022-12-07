@@ -1,0 +1,10 @@
+These are the survey responses that were entirely or partially filtered. The responses are indexed according to their row in "survey_responses_raw.csv"
+
+Responses removed entirely due to clearly being unserious:
+R74 R75
+
+Responses to the reviewer section removed due to claiming no review activity:
+R26 R54 R64 R89 R108 R132 R134 R137 R145 R203
+
+Responses to the submitter section removed due to claiming no submission activity:
+R73 R91
