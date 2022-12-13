@@ -13,9 +13,6 @@ common.tokens : [str] = common.read_file(tokens_file_path, True)
 pr_html_urls  : [str] = common.read_file(input_file_path, True)
 print(f"Read {len(common.tokens)} tokens and {len(pr_html_urls)} PRs")
 
-# TODO Remove me
-random.shuffle(pr_html_urls)
-pr_html_urls = pr_html_urls[:500]
 
 '''
 Return the timestamp string of a GitHub event. The following events are supported:
@@ -457,10 +454,7 @@ def _count_events_before_creation(custom_timeline : [dict], pr_metadata : dict) 
 
     return event_count
 
-ccc = 0 # TODO Remove me
-
 def get_last_readiness_index(timeline : [dict], get_pr_json : dict) -> int:
-    global ccc # TODO Remove me
 
     events_before_creation = _count_events_before_creation(timeline, get_pr_json)
 
@@ -474,7 +468,6 @@ def get_last_readiness_index(timeline : [dict], get_pr_json : dict) -> int:
             break
 
     if creator_is_the_only_participant:
-        ccc += 1 # TODO Remove me
         # Locate readiness one third through the PR timeline
         index = int((len(timeline) - events_before_creation) / 3)
         return index
@@ -553,8 +546,6 @@ def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : st
     # Find the last timeline index of the "middle" PR state, i.e.,
     # halfway between readiness and closure
     last_middle_index = int((last_closure_index + last_readiness_index) / 2)
-
-    return # TODO Remove me
 
     def report_and_abort(message : str):
         print("Internal error: " + message)
@@ -635,7 +626,5 @@ for i, pr_html_url in enumerate(pr_html_urls):
     print(pr_html_url)
     extract_pr_and_write_to_file(repo_name, pr_number, pr_html_url, file_path)
     print(f"Progress: {(i+1) / len(pr_html_urls) :.3%}")
-
-print(ccc) # TODO Remove me
 
 print("Done.")
