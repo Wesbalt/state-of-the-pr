@@ -1,27 +1,38 @@
 import sys, os, common, pprint, statistics
 
 if len(sys.argv) != 2:
-	print("Usage: py %s <extraction_directory>" % sys.argv[0])
+	print("Usage: py %s <extraction_csv>" % sys.argv[0])
 	sys.exit(1)
 
-path_to_extraction_files = sys.argv[1]
-extraction_filenames = os.listdir(path_to_extraction_files)
-print(f"Found {len(extraction_filenames)} extraction files")
+extraction_file_path = sys.argv[1]
+pr_dicts = common.read_csv_as_dicts(extraction_file_path)
+
+factor_names = [key.split("_", 1)[1] for key in pr_dicts[0].keys() if key.startswith("Ready_")]
+
+'''
+for pr_dict in pr_dicts:
+    for base_name in factor_names:
+        prefixed_names = ["Ready_" + base_name, "Middle_" + base_name, "Closure_" + base_name]
+        values = [pr_dict[prefixed_name] for prefixed_name in prefixed_names]
+        factor_dict[base_name].extend(values)
+'''
 
 # A dictionary that connects each factor name to its values in all states.
 # Example entry: "added_lines" : [2, 10, 30, -1, 3.14]
 factor_dict = {}
 
+for name in factor_names:
+    values = []
+    values.extend([pr_dict["Ready_"   + name] for pr_dict in pr_dicts])
+    values.extend([pr_dict["Middle_"  + name] for pr_dict in pr_dicts])
+    values.extend([pr_dict["Closure_" + name] for pr_dict in pr_dicts])
+    factor_dict[name] = [float(v) for v in values]
+
+'''
 # Find outliers in the filtration file
 outlier_filenames : [str] = []
 
 print("Reading extraction files... (Takes a while if cold)")
-
-# TODO Remove me
-# files = []
-# factor_of_interest = "test_files"
-
-ccc = 0 # TODO Remove me
 
 # Read the extraction files while skipping outliers
 extraction_files_read = 0
@@ -71,12 +82,13 @@ print(f"{extraction_files_read} extraction files read")
 #     print(f"    value = {value} ({state} state)")
 #     print()
 # sys.exit()
+'''
 
 print()
-print("Factor | Min | 25% | Median | 75% | Max | Mean | Stdev")
+print("Factor | Min | 25% | Med | 75% | Max | Mean | Stdev")
 print("------------------------------------------------------")
 
-for name in sorted(factor_dict):
+for name in factor_names:
     values      = factor_dict[name]
     quantiles   = statistics.quantiles(values, n=4)
     quantile_25 = round(quantiles[0], 1)
@@ -88,5 +100,3 @@ for name in sorted(factor_dict):
 
 print()
 print("Done.")
-
-print(ccc) # TODO Remove me

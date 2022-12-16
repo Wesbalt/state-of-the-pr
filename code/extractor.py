@@ -624,12 +624,9 @@ def extract_and_write_pr(pr_url : str):
     pr_dict["URL"] = pr_url
     pr_dict["Merged"] = get_pr_json["merged"]
     
-    for factor_name, factor_value in readiness_state.items():
-        pr_dict["Ready_" + factor_name] = factor_value
-    for factor_name, factor_value in middle_state.items():
-        pr_dict["Middle_" + factor_name] = factor_value
-    for factor_name, factor_value in closure_state.items():
-        pr_dict["Closure_" + factor_name] = factor_value
+    for name, value in readiness_state.items():  pr_dict["Ready_"   + name] = value
+    for name, value in middle_state   .items():  pr_dict["Middle_"  + name] = value
+    for name, value in closure_state  .items():  pr_dict["Closure_" + name] = value
 
     #print(extracted_pr_dicts[0].keys())
 
