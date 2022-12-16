@@ -1,18 +1,55 @@
-import sys, common, pprint, concurrent, datetime, random, os, copy, concurrent.futures, json
+import sys, common, pprint, concurrent, datetime, random, os, copy, concurrent.futures, json, csv
 
-# TODO Rename factors in the source code and extraction files
+# TODO Rename factors source code
+# TODO Mark the custom timeline
 
 if len(sys.argv) != 4:
-	print("Usage: py %s <input> <tokens> <output>" % sys.argv[0])
+	print("Usage: py %s <tokens_file> <selection_file> <extraction_csv>" % sys.argv[0])
 	sys.exit(1)
 
-input_file_path  = sys.argv[1]
-tokens_file_path = sys.argv[2]
-output_path      = sys.argv[3]
-common.tokens : [str] = common.read_file(tokens_file_path, True)
-pr_html_urls  : [str] = common.read_file(input_file_path, True)
-print(f"Read {len(common.tokens)} tokens and {len(pr_html_urls)} PRs")
+tokens_file_path     = sys.argv[1]
+selection_file_path  = sys.argv[2]
+extraction_file_path = sys.argv[3]
 
+# Read the GitHub API tokens
+common.tokens : [str] = common.read_file(tokens_file_path, True)
+print(f"Read {len(common.tokens)} tokens")
+
+# Read the selected PRs
+f = open(selection_file_path, "r", newline="")
+selected_pr_urls : [str] = f.read().splitlines()
+f.close()
+print(f"Read {len(selected_pr_urls)} selected PRs")
+
+# Read the extracted PRs
+extracted_pr_dicts : [dict] = []
+if os.path.exists(extraction_file_path):
+    extracted_pr_dicts = common.read_csv_as_dicts(extraction_file_path)
+    print(f"Read {len(extracted_pr_dicts)} extracted PRs")
+else:
+    print("Did not find an existing extraction file")
+
+'''
+csv_file = open(, "r", newline="")
+csv_reader = csv.reader(csv_file)
+next(csv_reader) # Skip the column header
+extracted_pr_urls : [str] = [row[0] for row in csv_reader]
+csv_file.close()
+'''
+
+# Calculate the PRs that need to be extracted
+extracted_pr_urls  : [str] = [pr_dict["URL"] for pr_dict in extracted_pr_dicts]
+pr_urls_to_extract : [str] = list(set(selected_pr_urls) - set(extracted_pr_urls))
+print(f"{len(pr_urls_to_extract)} PRs are to be extracted")
+pr_urls_to_extract = sorted(pr_urls_to_extract) # Sort them for the sake of determinism
+
+'''
+# Set this to non-zero if you would like to extract a sample
+sample_size = 0
+if sample_size:
+    pr_html_urls = random.sample(pr_html_urls, sample_size)
+    print(f"Sample of size {sample_size} taken")
+'''
 
 '''
 Return the timestamp string of a GitHub event. The following events are supported:
@@ -173,25 +210,25 @@ def event_is_participatory(event : dict) -> bool:
 def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : [dict], get_commit_jsons : [dict]) -> (dict, str):
 
     factors = {
-        "approvals"        : 0, # No. of reviews in the approved state
-        "assignees"        : 0, # No. of assignees
-        "change_requests"  : 0, # No. of reviews in the changes requested state
-        "changed_files"    : 0, # No. of files changed
-        "conflicts"        : 0, # No. of occurrences of the word "conflict" in the PR thread
-        "cross_references" : 0, # No. of cross-references to this PR from another PR or issue
-        "discussion"       : 0, # No. of discussion comments
-        "events"           : 0, # No. of events on this PR
-        "failed_builds"    : 0, # Proportion of failed builds
-        "fixes"            : 0, # No. of references to other issues and PRs in the PR thread
-        "intermission"     : 0, # Average time between events, in minutes
-        "labels"           : 0, # No. of labels
-        "last_status"      : 1, # 0 if the last commit had any failing status checks, 1 otherwise
-        "mentions"         : 0, # No. of @-mentions in the PR
-        "milestones"       : 0, # No. of milestones this PR contributes to
-        "participants"     : 0, # No. of unique non-bot users who have created participatory events in the PR thread
-        "pr_commits"       : 0, # No. of commits
-        "review_comments"  : 0, # No. of review comments, including subsequent comments on reviews
-        "test_files"       : 0, # No. of test files
+        "Approvals"         : 0, # No. of reviews in the approved state
+        "Assignees"         : 0, # No. of assignees
+        "Build_Fail_Rate"   : 0, # Proportion of failed builds
+        "Change_Requests"   : 0, # No. of reviews in the changes requested state
+        "Changed_Files"     : 0, # No. of files changed
+        "Conflicts"         : 0, # No. of occurrences of the word "conflict" in the PR thread
+        "Cross_References"  : 0, # No. of cross-references to this PR from another PR or issue
+        "Discussion"        : 0, # No. of discussion comments
+        "Events"            : 0, # No. of events on this PR
+        "Fixes"             : 0, # No. of references to other issues and PRs in the PR thread
+        "Intermission"      : 0, # Average time between events, in minutes
+        "Labels"            : 0, # No. of labels
+        "Last_Build_Status" : 1, # 0 if the last commit had any failing status checks, 1 otherwise
+        "Mentions"          : 0, # No. of @-mentions in the PR
+        "Milestones"        : 0, # No. of milestones this PR contributes to
+        "Participants"      : 0, # No. of unique non-bot users who have created participatory events in the PR thread
+        "PR_Commits"        : 0, # No. of commits
+        "Review_Comments"   : 0, # No. of review comments, including subsequent comments on reviews
+        "Test_Files"        : 0, # No. of test files
     }
 
     current_title = get_pr_json["title"] # Assume the latest title as the current one. It changes on "renamed" events
@@ -214,20 +251,20 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
 
         if event["actor"] not in participants and event_is_participatory(event):
             participants.add(event["actor"])
-            factors["participants"] += 1
+            factors["Participants"] += 1
 
         if event_type == "assigned":
-            factors["assignees"] += 1
+            factors["Assignees"] += 1
 
         elif event_type == "unassigned":
-            factors["assignees"] -= 1
+            factors["Assignees"] -= 1
             # Don't let this factor go negative. This happens due to duplicate unassignments.
             # Example: https://api.github.com/repos/angular/angular/issues/34305/timeline?per_page=100
             # See index 57 and 58 where the same user is unassigned by the same actor at the same time.
-            if factors["assignees"] < 0:  factors["assignees"] = 0
+            if factors["Assignees"] < 0:  factors["Assignees"] = 0
 
         elif event_type == "commented":
-            factors["discussion"] += 1
+            factors["Discussion"] += 1
             discussion_comments.append(event["body"])
 
         elif event_type == "comment_deleted":
@@ -240,7 +277,7 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
             # (Notice how mary-poppins has commented thrice but the
             # timeline data claims only two comments.)
             # Considering this and the rarity of this event (used 8
-            # times in a sample of 1000 PRs), let's just ignore it.
+            # times in a sample of 1,000 PRs), let's just ignore it.
             pass
 
         elif event_type == "committed":
@@ -256,7 +293,7 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
                     found_sha = True
 
                     status_state = status_json["state"].lower()
-                    factors["last_status"] = int(status_state != "failure")
+                    factors["Last_Build_Status"] = int(status_state != "failure")
                     total_builds += 1
                     if status_state == "failure":  failed_builds += 1
 
@@ -279,7 +316,7 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
                        "pull request" in first_line:
                         continue # Skip this commit
 
-            factors["pr_commits"] += 1
+            factors["PR_Commits"] += 1
 
             # Get the source and test files touched by the PR
             found_sha = False
@@ -293,8 +330,8 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
                         if fname not in filenames:
                             # This commit touched a new path!
                             filenames.add(fname)
-                            factors["changed_files"] += 1
-                            if "test" in fname:  factors["test_files"] += 1
+                            factors["Changed_Files"] += 1
+                            if "test" in fname:  factors["Test_Files"] += 1
 
                     break # We found the matching SHA, let's exit
 
@@ -308,26 +345,26 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
             commit_comments.append(event["body"])
 
         elif event_type == "cross-referenced":
-            factors["cross_references"] += 1
+            factors["Cross_References"] += 1
 
         elif event_type == "milestoned":
-            factors["milestones"] += 1
+            factors["Milestones"] += 1
 
         elif event_type == "demilestoned":
-            factors["milestones"] -= 1
+            factors["Milestones"] -= 1
 
         elif event_type == "labeled":
-            factors["labels"] += 1
+            factors["Labels"] += 1
 
         elif event_type == "unlabeled":
-            factors["labels"] -= 1
+            factors["Labels"] -= 1
             # Don't let this factor go negative. This happens due to duplicate unlabeling.
             # Example: https://api.github.com/repos/palantir/atlasdb/issues/6005/timeline
             # See index 3-7 where the "merge when ready" label is applied and then unlabeled four times.
-            if factors["labels"] < 0:  factors["labels"] = 0
+            if factors["Labels"] < 0:  factors["Labels"] = 0
 
         elif event_type == "mentioned":
-            factors["mentions"] += 1
+            factors["Mentions"] += 1
 
         elif event_type == "renamed":
             current_title = event["rename"]["to"]
@@ -337,11 +374,11 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
             # unlike all other events that come from GitHub's timeline.
             # Docs: https://docs.github.com/en/rest/pulls/comments#list-review-comments-on-a-pull-request
             # Example: https://api.github.com/repos/pingcap/tidb/pulls/14123/comments
-            factors["review_comments"] += 1
+            factors["Review_Comments"] += 1
             review_comments.append(event["body"])
 
         elif event_type == "reviewed":
-            factors["review_comments"] += 1
+            factors["Review_Comments"] += 1
             if event["body"]:  review_comments.append(event["body"])
 
             review_state = event["state"].lower()
@@ -349,9 +386,9 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
             if review_state == "dismissed":
                 return None, f"unexpected dismissed review state in timeline (index {event['array_index']})"
             elif review_state == "approved":
-                factors["approvals"] += 1
+                factors["Approvals"] += 1
             elif review_state == "changes_requested":
-                factors["change_requests"] += 1
+                factors["Change_Requests"] += 1
             elif review_state == "commented":
                 pass
             else:
@@ -363,27 +400,27 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
             state = event["dismissed_review"]["state"].lower()
 
             if state == "approved":
-                factors["approvals"] -= 1
+                factors["Approvals"] -= 1
             elif state == "changes_requested":
-                factors["change_requests"] -= 1
+                factors["Change_Requests"] -= 1
 
             # Don't let these factors go negative. This appears to happen
             # due to reviews not on the timeline being dismissed.
             # Example 1 (see index 11): https://api.github.com/repos/certbot/certbot/issues/7376/timeline
             # Example 2 (see index 9):  https://api.github.com/repos/python/cpython/issues/17719/timeline
-            if factors["approvals"] < 0:
-                factors["approvals"] = 0
-            if factors["change_requests"] < 0:
-                factors["change_requests"] = 0
+            if factors["Approvals"] < 0:
+                factors["Approvals"] = 0
+            if factors["Change_Requests"] < 0:
+                factors["Change_Requests"] = 0
 
         elif event_type == "marked_as_duplicate":
-            # Fun fact: this event was used zero (!) times in a sample of 1000 PRs.
+            # Fun fact: this event was used zero (!) times in a sample of 1,000 PRs.
             pass
 
         elif event_type == "ready_for_review":
             # This event could be used for locating readiness,
             # however, it's seldom used. It was used only 2%
-            # of the time in a sample of 1000 PRs.
+            # of the time in a sample of 1,000 PRs.
             pass
 
         elif event_type == "referenced":
@@ -406,11 +443,11 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
     events_before_creation = _count_events_before_creation(timeline, get_pr_json)
 
     if len(timeline) - events_before_creation < 2:
-        factors["intermission"] = 0 # Avoid division by zero
+        factors["Intermission"] = 0 # Avoid division by zero
     else:
         lifetime = (last_event_time - opening_time).total_seconds() / 60 # Convert to minutes
         # Subtract events_before_creation because we want to exclude them
-        factors["intermission"] = round(lifetime / (len(timeline) - events_before_creation - 1))
+        factors["Intermission"] = round(lifetime / (len(timeline) - events_before_creation - 1))
 
     # Collect all the text in the PR thread
     all_text = []
@@ -424,25 +461,25 @@ def generate_state(timeline : [dict], get_pr_json : dict, commit_status_jsons : 
     # Calculate the number of references to issues/PRs
     for text in all_text:
 
-        factors["conflicts"] += text.lower().count("conflict")
+        factors["Conflicts"] += text.lower().count("conflict")
 
         for i in range(len(text)-1):
             # This is a very generous heuristic, but upon inspecting
             # PRs that achieve high numbers of fixes, I don't think
             # it's a big problem.
             if text[i] == "#" and text[i+1].isnumeric():
-                factors["fixes"] += 1
+                factors["Fixes"] += 1
 
-    factors["events"] = len(timeline)
+    factors["Events"] = len(timeline)
 
     if total_builds:
-        factors["failed_builds"] = failed_builds / total_builds
+        factors["Build_Fail_Rate"] = failed_builds / total_builds
     else:
-        factors["failed_builds"] = 0
+        factors["Build_Fail_Rate"] = 0
 
     return factors, ""
 
-# Count the number of timeline events that occured before the PR was opened.
+# Count the number of timeline events that occurred before the PR was opened.
 def _count_events_before_creation(custom_timeline : [dict], pr_metadata : dict) -> int:
     event_count = 0
     creation_time : datetime.datetime = common.string_to_datetime(pr_metadata["created_at"])
@@ -484,10 +521,13 @@ def get_last_readiness_index(timeline : [dict], get_pr_json : dict) -> int:
     print("Internal error: unexpected code path")
     sys.exit(1)
 
-def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : str, output_path : str):
-    if os.path.exists(file_path):
-        print("    File already exists")
-        return
+# def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : str, output_path : str):
+def extract_and_write_pr(pr_url : str):
+
+    # Get the repo and number of the PR
+    group : [str] = pr_url.split("/")
+    repo_name = group[3] + "/" + group[4]
+    pr_number = int(group[len(group)-1])
 
     # API URLs
     # Docs: https://docs.github.com/en/rest/reference/pulls#get-a-pull-request
@@ -518,6 +558,7 @@ def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : st
     # for these calls, hence them being executed after the other ones.
     commit_status_futures : [concurrent.futures.Future] = []
     get_commit_futures    : [concurrent.futures.Future] = []
+
     for pr_commit_json in pr_list_commits_jsons:
         sha  = pr_commit_json["sha"]
         commit_status_url = pr_commit_status_api_url.replace("{sha}", sha)
@@ -549,7 +590,7 @@ def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : st
 
     def report_and_abort(message : str):
         print("Internal error: " + message)
-        print("Pull: " + html_url)
+        print("Pull: " + pr_url)
         print("Get: " + get_pr_api_url)
         print("Commits: " + pr_list_commits_api_url)
         print("Timeline: " + pr_timeline_api_url)
@@ -579,6 +620,24 @@ def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : st
         for e in t:
             print(f"\t{e['timestamp']} {e['actor']} {e['event']} {e['origin']} {e['array_index']}") '''
 
+    pr_dict = {}
+    pr_dict["URL"] = pr_url
+    pr_dict["Merged"] = get_pr_json["merged"]
+    
+    for factor_name, factor_value in readiness_state.items():
+        pr_dict["Ready_" + factor_name] = factor_value
+    for factor_name, factor_value in middle_state.items():
+        pr_dict["Middle_" + factor_name] = factor_value
+    for factor_name, factor_value in closure_state.items():
+        pr_dict["Closure_" + factor_name] = factor_value
+
+    #print(extracted_pr_dicts[0].keys())
+
+    extracted_pr_dicts.append(pr_dict)
+    #print(len(pr_dict.items()))
+    #exit()
+
+    '''
     # Create and write to the file
     f = open(output_path, "w")
 
@@ -605,26 +664,16 @@ def extract_pr_and_write_to_file(repo_name : str, pr_number : int, html_url : st
     f.close()
 
     print("    Wrote data to " + output_path)
-
-# Set this to non-zero if you would like to extract a sample
-sample_size = 0
-if sample_size:
-    pr_html_urls = random.sample(pr_html_urls, sample_size)
-    print(f"Sample of size {sample_size} taken")
+    '''
 
 # Make the output directory if it does not exist
-if not os.path.exists(output_path):  os.mkdir(output_path)
+# if not os.path.exists(output_path):  os.mkdir(output_path)
 
-for i, pr_html_url in enumerate(pr_html_urls):
+for i, pr_url in enumerate(pr_urls_to_extract):
+    print(f"Extracting {pr_url}...")
+    extract_and_write_pr(pr_url)
+    print(f"Progress: {(i+1) / len(pr_urls_to_extract) :.3%}")
 
-    group : [str] = pr_html_url.split("/")
-    repo_name = group[3] + "/" + group[4]
-    pr_number = int(group[len(group)-1])
-    filename  = repo_name.replace("/", "_") + "_" + str(pr_number) + ".txt"
-    file_path = os.path.join(output_path, filename)
-
-    print(pr_html_url)
-    extract_pr_and_write_to_file(repo_name, pr_number, pr_html_url, file_path)
-    print(f"Progress: {(i+1) / len(pr_html_urls) :.3%}")
+common.write_dicts_to_csv(extraction_file_path, extracted_pr_dicts)
 
 print("Done.")

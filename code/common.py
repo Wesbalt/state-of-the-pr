@@ -1,4 +1,4 @@
-import requests, traceback, time, datetime, sys, typing, pprint
+import requests, traceback, time, datetime, sys, typing, pprint, csv
 
 file_state_separator = "-"*50 # Used as a separator between different PR states in extraction files
 
@@ -10,6 +10,29 @@ def string_to_bool(s : str) -> bool:
 
 def string_to_datetime(timestamp_string : str) -> datetime.datetime:
 	return datetime.datetime.strptime(timestamp_string, "%Y-%m-%dT%H:%M:%SZ")
+
+def read_csv_as_dicts(path : str) -> [dict]:
+    f = open(path, "r", newline="")
+    csv_reader = csv.DictReader(f) # The dict field names are determined by the first row in the file
+    dicts = [row_dict for row_dict in csv_reader]
+    f.close()
+    return dicts
+
+def write_dicts_to_csv(path : str, dicts : [dict]):
+
+    # Get the field names and make sure every dictionary has identical keys
+    fieldnames = dicts[0].keys() # Choose the field names in the 1st dict
+    for d in dicts:
+        if d.keys() != fieldnames:
+            # TODO Improve error message
+            print("Non-matching dictionary keys")
+            exit()
+
+    f = open(path, "w", newline="") # This truncates the file
+    csv_writer = csv.DictWriter(f, fieldnames)
+    csv_writer.writeheader()
+    csv_writer.writerows(dicts)
+    f.close()
 
 '''
 Return the lines from a text file, removing comments if desired
@@ -32,7 +55,7 @@ def read_file(path : str, remove_comments : bool) -> [str]:
 
 '''
 Read an extraction file, returning the metadata and factors from the PR states.
-The factor lists are ordered according to the orignal file contents. See the
+The factor lists are ordered according to the original file contents. See the
 extraction directory for reference on the file syntax.
 
 Return:
